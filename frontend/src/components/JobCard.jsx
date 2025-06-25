@@ -1,20 +1,27 @@
 import React from 'react';
 import './JobCard.css';
 
+function truncateWords(text, maxWords) {
+  if (!text) return '';
+  const words = text.split(/\s+/);
+  if (words.length <= maxWords) return text;
+  return words.slice(0, maxWords).join(' ') + '...';
+}
+
 export default function JobCard({ jobData }) {
   const {
     companyLogo,
     companyName,
     title,
-    tagNames,
     salary_min,
     salary_max,
     location,
     job_type,
-    description_short,
+    description_full,
     timeAgo,
     founder,
-    sponsorship_available
+    sponsorship_available,
+    experience_level_required
   } = jobData;
 
   return (
@@ -24,21 +31,18 @@ export default function JobCard({ jobData }) {
         <img src={companyLogo} alt={companyName} className="company-logo" />
         <div className="job-info">
           <div className="job-meta">
-            <span className="job-time">{timeAgo}</span>
-            <span className="job-level">New Grad, Entry Level</span>
+            <span className="job-time time-bg black-text">{timeAgo}</span>
+            <span className="job-level level-bg black-text">{experience_level_required}</span>
           </div>
           <h2 className="job-title">{title}</h2>
-          <div className="job-tags">
-            {tagNames.map(tag => <span key={tag} className="job-tag">{tag}</span>)}
-          </div>
           <div className="job-details">
-            <span>{location}</span>
+            <span className="job-detail-item"><span role="img" aria-label="location">📍</span> {location}</span>
             <span>·</span>
-            <span>{job_type}</span>
+            <span className="job-detail-item"><span role="img" aria-label="job type">💼</span> {job_type}</span>
             <span>·</span>
-            <span>${salary_min / 1000}K/yr - ${salary_max / 1000}K/yr</span>
+            <span className="job-detail-item"><span role="img" aria-label="salary">💰</span> ${salary_min / 1000}K/yr - ${salary_max / 1000}K/yr</span>
           </div>
-          <div className="job-desc">{description_short}</div>
+          <div className="job-desc">{truncateWords(description_full, 100)}</div>
         </div>
       </div>
       {/* Right section */}
