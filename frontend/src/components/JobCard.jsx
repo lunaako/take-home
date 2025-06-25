@@ -1,4 +1,6 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLocationDot, faBriefcase, faMoneyBillWave } from '@fortawesome/free-solid-svg-icons';
 import './JobCard.css';
 
 function truncateWords(text, maxWords) {
@@ -36,11 +38,11 @@ export default function JobCard({ jobData }) {
           </div>
           <h2 className="job-title">{title}</h2>
           <div className="job-details">
-            <span className="job-detail-item"><span role="img" aria-label="location">📍</span> {location}</span>
+            <span className="job-detail-item"><FontAwesomeIcon icon={faLocationDot} className="job-icon" /> {location}</span>
             <span>·</span>
-            <span className="job-detail-item"><span role="img" aria-label="job type">💼</span> {job_type}</span>
+            <span className="job-detail-item"><FontAwesomeIcon icon={faBriefcase} className="job-icon" /> {job_type}</span>
             <span>·</span>
-            <span className="job-detail-item"><span role="img" aria-label="salary">💰</span> ${salary_min / 1000}K/yr - ${salary_max / 1000}K/yr</span>
+            <span className="job-detail-item"><FontAwesomeIcon icon={faMoneyBillWave} className="job-icon" /> ${salary_min / 1000}K/yr - ${salary_max / 1000}K/yr</span>
           </div>
           <div className="job-desc">{truncateWords(description_full, 100)}</div>
         </div>

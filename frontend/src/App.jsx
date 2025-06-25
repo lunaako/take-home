@@ -1,5 +1,8 @@
 import './App.css';
 import JobCard from './components/JobCard';
+import LoginModal from './LoginModal';
+import SignupModal from './SignupModal';
+import React, { useState } from 'react';
 import {
   users,
   companies,
@@ -35,9 +38,18 @@ function getDisplayJobs() {
 
 function App() {
   const displayJobs = getDisplayJobs();
+  const [showLogin, setShowLogin] = useState(false);
+  const [showSignup, setShowSignup] = useState(false);
 
   return (
     <div className="app-container">
+      <div className="topbar">
+        <div></div>
+        <div className="auth-buttons">
+          <button className="auth-btn" onClick={() => setShowLogin(true)}>Login</button>
+          <button className="auth-btn" onClick={() => setShowSignup(true)}>Sign Up</button>
+        </div>
+      </div>
       <h1 className="main-title">Our Popular Jobs</h1>
       <p className="subtitle">Be one of the first 10 to apply</p>
       <div className="job-list">
@@ -45,6 +57,8 @@ function App() {
           <JobCard key={job.id} jobData={job} />
         ))}
       </div>
+      <LoginModal open={showLogin} onClose={() => setShowLogin(false)} />
+      <SignupModal open={showSignup} onClose={() => setShowSignup(false)} />
     </div>
   );
 }
