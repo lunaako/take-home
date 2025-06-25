@@ -1,0 +1,127 @@
+
+// The Users table is role-agnostic. It only represents a person's core identity.
+Table users {
+  id int [pk, increment]
+  first_name varchar
+  last_name varchar
+  email varchar [unique, not null]
+  password_hash varchar [not null]
+  profile_picture_url varchar
+  bio text [note: "General user bio. Can be displayed for founders, candidates, etc."]
+  created_at timestamp [default: `now()`]
+  updated_at timestamp [default: `now()`]
+}
+
+// Defines a user's "candidate" role. A user becomes a candidate by creating a record here.
+// This creates a One-to-One relationship with the users table.
+Table candidate_profiles {
+  user_id int [pk, ref: - users.id] // The '-' indicates a one-to-one relationship
+  work_authorization varchar
+  experience_level varchar
+  skills json
+  is_actively_seeking boolean [default: true, note: "Allows candidates to pause their job search."]
+  updated_at timestamp [default: `now()`]
+}
+
+// Stores company information.
+Table companies {
+  id int [pk, increment]
+  name varchar [not null]
+  logo_url varchar
+  industry varchar
+  stage varchar
+  created_at timestamp [default: `now()`]
+  updated_at timestamp [default: `now()`]
+}
+
+// Linking table to create a Many-to-Many relationship between users and companies.
+// This defines a user's "employer" role within a specific company.
+Table company_members {
+  user_id int [ref: > users.id]
+  company_id int [ref: > companies.id]
+  role_in_company varchar [not null, note: "e.g., 'founder', 'hr', 'recruiter'"]
+
+  Indexes {
+    (user_id, company_id) [pk] // Composite primary key
+  }
+}
+
+// The core Jobs table.
+Table jobs {
+  id int [pk, increment]
+  title varchar [not null]
+  company_id int [ref: > companies.id, not null]
+  posted_by_user_id int [ref: > users.id, not null]
+  
+  description_short varchar
+  description_full text
+  job_type varchar [default: 'Full-time']
+  location varchar [default: 'Remote - US']
+  experience_level_required varchar
+  
+  salary_min int
+  salary_max int
+  salary_currency varchar [default: 'USD']
+
+  sponsorship_available boolean [default: false]
+  created_at timestamp [default: `now()`]
+  updated_at timestamp [default: `now()`]
+
+  //(Extension) Fields for 'Popular Jobs' feature
+  view_count int [default: 0]
+  application_count int [default: 0]
+}
+
+// Stores a master list of all possible tags.
+Table tags {
+  id int [pk, increment]
+  name varchar [unique, not null]
+}
+
+// Linking table for the Many-to-Many relationship between jobs and tags.
+Table job_tags {
+  job_id int [ref: > jobs.id]
+  tag_id int [ref: > tags.id]
+
+  Indexes {
+    (job_id, tag_id) [pk]
+  }
+}
+
+// Records a user's application for a job.
+Table applications {
+  id int [pk, increment]
+  user_id int [ref: > users.id, not null]
+  job_id int [ref: > jobs.id, not null]
+  status varchar [default: 'applied']
+  created_at timestamp [default: `now()`]
+
+  Indexes {
+    (user_id, job_id) [unique, note: "A user can only apply to the same job once."]
+  }
+}
+
+
+// (Extension) Tables for Chat Functionality
+
+// Represents a chat thread between a candidate and an employer about a specific job.
+Table conversations {
+  id int [pk, increment]
+  job_id int [ref: > jobs.id]
+  candidate_id int [ref: > users.id]
+  employer_id int [ref: > users.id, note: "This would be a user from company_members."]
+  created_at timestamp [default: `now()`]
+  
+  Indexes {
+    (job_id, candidate_id, employer_id) [unique]
+  }
+}
+
+// Stores all messages within a conversation.
+Table messages {
+  id int [pk, increment]
+  conversation_id int [ref: > conversations.id, not null]
+  sender_id int [ref: > users.id, not null]
+  content text [not null]
+  created_at timestamp [default: `now()`]
+}
