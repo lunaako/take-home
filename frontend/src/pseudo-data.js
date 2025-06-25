@@ -68,6 +68,7 @@ export const companies = [
         logo_url: 'https://i.pravatar.cc/48?u=quantumleap', // Placeholder logo
         industry: 'Cloud Computing',
         stage: 'Late Stage',
+        short_description: 'Cloud platform for enterprise data. Fast, secure, scalable.'
     },
     {
         id: 102,
@@ -75,6 +76,7 @@ export const companies = [
         logo_url: 'https://i.pravatar.cc/48?u=greensprout', // Placeholder logo
         industry: 'Health & Wellness',
         stage: 'Seed',
+        short_description: 'Healthy food solutions for modern lifestyles. Fresh, organic, convenient.'
     },
 ];
 
@@ -109,8 +111,7 @@ export const jobs = [
         title: 'Senior Product Designer',
         company_id: 101, // QuantumLeap Tech
         posted_by_user_id: 1, // Sarah Jenkins
-        description_short: 'Lead the design of our next-generation cloud management platform.',
-        description_full: 'The Hive Data team plays a central role at QuantumLeap in enabling massive amounts of data to be labeled in an accurate, efficient, and scalable way. You’ll take a critical part in improving a platform of services and tools used by millions, and which is paramount to the success of...',
+        description: 'The Hive Data team plays a central role at QuantumLeap in enabling massive amounts of data to be labeled in an accurate, efficient, and scalable way. You will take a critical part in improving a platform of services and tools used by millions, and which is paramount to the success of...',
         job_type: 'Full-time',
         location: 'Remote - US',
         experience_level_required: 'Senior Level',
@@ -124,8 +125,7 @@ export const jobs = [
         title: 'Full-stack Engineer',
         company_id: 102, // GreenSprout Foods
         posted_by_user_id: 3, // Emily Davis
-        description_short: 'Build and maintain our customer-facing web application and backend services.',
-        description_full: 'The Hive Data team plays a central role at GreenSprout in enabling massive amounts of data to be labeled in an accurate, efficient, and scalable way. You’ll take a critical part in improving a platform of services and tools used by millions, and which is paramount to the success of...',
+        description: 'The Hive Data team plays a central role at GreenSprout in enabling massive amounts of data to be labeled in an accurate, efficient, and scalable way. You will take a critical part in improving a platform of services and tools used by millions, and which is paramount to the success of...',
         job_type: 'Full-time',
         location: 'Remote - US',
         experience_level_required: 'Entry Level',
@@ -139,8 +139,7 @@ export const jobs = [
         title: 'Machine Learning Intern (Fall 2025)',
         company_id: 101, // QuantumLeap Tech
         posted_by_user_id: 1, // Sarah Jenkins
-        description_short: 'Join our AI research team to work on cutting-edge prediction models.',
-        description_full: 'The Hive Data team plays a central role at QuantumLeap in enabling massive amounts of data to be labeled in an accurate, efficient, and scalable way. You’ll take a critical part in improving a platform of services and tools used by millions, and which is paramount to the success of...',
+        description: 'The Hive Data team plays a central role at QuantumLeap in enabling massive amounts of data to be labeled in an accurate, efficient, and scalable way. You will take a critical part in improving a platform of services and tools used by millions, and which is paramount to the success of...',
         job_type: 'Internship',
         location: 'Remote - US',
         experience_level_required: 'Entry Level',
@@ -154,8 +153,7 @@ export const jobs = [
         title: 'Product Designer',
         company_id: 102, // GreenSprout Foods
         posted_by_user_id: 3, // Emily Davis
-        description_short: 'Design intuitive and delightful user experiences for our mobile app.',
-        description_full: 'The Hive Data team plays a central role at GreenSprout in enabling massive amounts of data to be labeled in an accurate, efficient, and scalable way. You’ll take a critical part in improving a platform of services and tools used by millions, and which is paramount to the success of...',
+        description: 'The Hive Data team plays a central role at GreenSprout in enabling massive amounts of data to be labeled in an accurate, efficient, and scalable way. You will take a critical part in improving a platform of services and tools used by millions, and which is paramount to the success of...',
         job_type: 'Full-time',
         location: 'Remote - US',
         experience_level_required: 'Entry Level',
