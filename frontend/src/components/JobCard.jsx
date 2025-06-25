@@ -57,21 +57,23 @@ export default function JobCard({ jobData, currentUser, onProtectedAction }) {
       {/* Right section */}
       <div className="job-card-right horizontal-right">
         <div className="right-content-row">
-          <div className={notLoggedIn ? 'match-box blurred-box' : 'match-box'}>
-            <div className="match-label">STRONG MATCH</div>
-            <div className="match-desc">{sponsorship_available ? '✔ H1B Sponsor Likely' : 'H1B Sponsor Unlikely'}</div>
-          </div>
-          <div className={notLoggedIn ? 'founder-box blurred-box' : 'founder-box'}>
-            <img src={founder?.profile_picture_url} alt={founder?.first_name} className="founder-pic" />
-            <div className="founder-info">
-              <div className="founder-name">{founder?.first_name} {founder?.last_name}</div>
-              <div className="founder-bio">{founder?.bio}</div>
+          <div className="match-box-btn-col">
+            <div className={notLoggedIn ? 'match-box blurred-box' : 'match-box'}>
+              <div className="match-label">STRONG MATCH</div>
+              <div className="match-desc">{sponsorship_available ? '✔ H1B Sponsor Likely' : 'H1B Sponsor Unlikely'}</div>
             </div>
+            <button className="apply-btn" onClick={handleButtonClick}>APPLY NOW</button>
           </div>
-        </div>
-        <div className="right-btn-row">
-          <button className="apply-btn" onClick={handleButtonClick}>APPLY NOW</button>
-          <button className="chat-btn" onClick={handleButtonClick}>LET'S CHAT</button>
+          <div className="founder-box-btn-col">
+            <div className={notLoggedIn ? 'founder-box blurred-box' : 'founder-box'}>
+              <img src={founder?.profile_picture_url} alt={founder?.first_name} className="founder-pic" />
+              <div className="founder-info">
+                <div className="founder-name">{founder?.first_name} {founder?.last_name}</div>
+                <div className="founder-bio">{founder?.bio}</div>
+              </div>
+            </div>
+            <button className="chat-btn" onClick={handleButtonClick}>LET'S CHAT</button>
+          </div>
         </div>
       </div>
     </div>

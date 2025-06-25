@@ -109,7 +109,7 @@ function App() {
           <div className="modal-content">
             <button className="modal-close" onClick={() => setShowRegisterTip(false)}>×</button>
             <h2 style={{color:'#ff9900'}}>Tips</h2>
-            <div style={{marginBottom: '16px'}}>Register with us to unlock more features!</div>
+            <div style={{marginBottom: '16px', color: '#111'}}>Register with us to unlock more features!</div>
             <button className="auth-btn" onClick={() => setShowRegisterTip(false)}>OK</button>
           </div>
         </div>
