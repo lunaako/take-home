@@ -20,12 +20,19 @@
 }
 .modal-close {
   position: absolute;
-  top: 12px;
-  right: 16px;
+  top: 8px;
+  right: 36px;
   background: none;
   border: none;
-  font-size: 1.5rem;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #111;
   cursor: pointer;
+  z-index: 10;
+  transition: color 0.2s;
+}
+.modal-close:hover {
+  color: #ff9900;
 }
 .modal-content h2 {
   margin-bottom: 18px;

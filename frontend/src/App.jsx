@@ -1,7 +1,6 @@
 import './App.css';
 import JobCard from './components/JobCard';
 import LoginModal from './LoginModal';
-import SignupModal from './SignupModal';
 import React, { useState } from 'react';
 import {
   users,
@@ -9,7 +8,8 @@ import {
   jobs,
   tags,
   job_tags,
-  company_members
+  company_members,
+  candidate_profiles
 } from './pseudo-data';
 
 function getDisplayJobs() {
@@ -39,26 +39,81 @@ function getDisplayJobs() {
 function App() {
   const displayJobs = getDisplayJobs();
   const [showLogin, setShowLogin] = useState(false);
-  const [showSignup, setShowSignup] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null);
+  const [showRegisterTip, setShowRegisterTip] = useState(false);
+
+  // Find the first candidate user for autofill
+  const candidateUser = (() => {
+    const candidate = candidate_profiles[0];
+    return users.find(u => u.id === candidate.user_id);
+  })();
+
+  // Handle login logic
+  const handleLogin = (email, password) => {
+    // For demo, password is always 'password'
+    const user = users.find(u => u.email === email);
+    if (user && password === 'password') {
+      setCurrentUser(user);
+      setShowLogin(false);
+    } else {
+      alert('Invalid credentials');
+    }
+  };
+
+  // Handler for protected actions
+  const handleProtectedAction = (e) => {
+    if (!currentUser) {
+      e.preventDefault();
+      setShowRegisterTip(true);
+    }
+  };
+
+  // Handle logout
+  const handleLogout = () => {
+    setCurrentUser(null);
+  };
 
   return (
     <div className="app-container">
       <div className="topbar">
         <div></div>
         <div className="auth-buttons">
-          <button className="auth-btn" onClick={() => setShowLogin(true)}>Login</button>
-          <button className="auth-btn" onClick={() => setShowSignup(true)}>Sign Up</button>
+          {currentUser ? (
+            <button className="auth-btn" onClick={handleLogout}>Log out</button>
+          ) : (
+            <button className="auth-btn" onClick={() => setShowLogin(true)}>Login</button>
+          )}
         </div>
       </div>
       <h1 className="main-title">Our Popular Jobs</h1>
       <p className="subtitle">Be one of the first 10 to apply</p>
       <div className="job-list">
         {displayJobs.map(job => (
-          <JobCard key={job.id} jobData={job} />
+          <JobCard
+            key={job.id}
+            jobData={job}
+            currentUser={currentUser}
+            onProtectedAction={handleProtectedAction}
+          />
         ))}
       </div>
-      <LoginModal open={showLogin} onClose={() => setShowLogin(false)} />
-      <SignupModal open={showSignup} onClose={() => setShowSignup(false)} />
+      <LoginModal
+        open={showLogin}
+        onClose={() => setShowLogin(false)}
+        autofillEmail={candidateUser?.email}
+        autofillPassword={"password"}
+        onLogin={handleLogin}
+      />
+      {showRegisterTip && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <button className="modal-close" onClick={() => setShowRegisterTip(false)}>×</button>
+            <h2 style={{color:'#ff9900'}}>Tips</h2>
+            <div style={{marginBottom: '16px'}}>Register with us to unlock more features!</div>
+            <button className="auth-btn" onClick={() => setShowRegisterTip(false)}>OK</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

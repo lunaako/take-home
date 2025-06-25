@@ -10,7 +10,7 @@ function truncateWords(text, maxWords) {
   return words.slice(0, maxWords).join(' ') + '...';
 }
 
-export default function JobCard({ jobData }) {
+export default function JobCard({ jobData, currentUser, onProtectedAction }) {
   const {
     companyLogo,
     companyName,
@@ -26,10 +26,17 @@ export default function JobCard({ jobData }) {
     experience_level_required
   } = jobData;
 
+  const notLoggedIn = !currentUser;
+  const handleButtonClick = (e) => {
+    if (notLoggedIn && onProtectedAction) {
+      onProtectedAction(e);
+    }
+  };
+
   return (
     <div className="job-card">
       {/* Left section */}
-      <div className="job-card-left">
+      <div className="job-card-left short-width">
         <img src={companyLogo} alt={companyName} className="company-logo" />
         <div className="job-info">
           <div className="job-meta">
@@ -48,19 +55,23 @@ export default function JobCard({ jobData }) {
         </div>
       </div>
       {/* Right section */}
-      <div className="job-card-right">
-        <div className="match-box">
-          <div className="match-label">STRONG MATCH</div>
-          <div className="match-desc">{sponsorship_available ? '✔ H1B Sponsor Likely' : 'H1B Sponsor Unlikely'}</div>
-          <button className="apply-btn">APPLY NOW</button>
-        </div>
-        <div className="founder-box">
-          <img src={founder?.profile_picture_url} alt={founder?.first_name} className="founder-pic" />
-          <div className="founder-info">
-            <div className="founder-name">{founder?.first_name} {founder?.last_name}</div>
-            <div className="founder-bio">{founder?.bio}</div>
+      <div className="job-card-right horizontal-right">
+        <div className="right-content-row">
+          <div className={notLoggedIn ? 'match-box blurred-box' : 'match-box'}>
+            <div className="match-label">STRONG MATCH</div>
+            <div className="match-desc">{sponsorship_available ? '✔ H1B Sponsor Likely' : 'H1B Sponsor Unlikely'}</div>
           </div>
-          <button className="chat-btn">LET'S CHAT</button>
+          <div className={notLoggedIn ? 'founder-box blurred-box' : 'founder-box'}>
+            <img src={founder?.profile_picture_url} alt={founder?.first_name} className="founder-pic" />
+            <div className="founder-info">
+              <div className="founder-name">{founder?.first_name} {founder?.last_name}</div>
+              <div className="founder-bio">{founder?.bio}</div>
+            </div>
+          </div>
+        </div>
+        <div className="right-btn-row">
+          <button className="apply-btn" onClick={handleButtonClick}>APPLY NOW</button>
+          <button className="chat-btn" onClick={handleButtonClick}>LET'S CHAT</button>
         </div>
       </div>
     </div>
