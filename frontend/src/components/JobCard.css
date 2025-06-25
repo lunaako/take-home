@@ -59,7 +59,7 @@
 }
 .job-desc {
   color: #444;
-  font-size: 1rem;
+  font-size: 0.92rem;
   margin-bottom: 0;
   text-align: left;
 }
@@ -92,7 +92,7 @@
   margin-top: 8px;
 }
 .match-box {
-  background: #f8f9ff;
+  background: none;
   border-radius: 8px;
   padding: 16px;
   text-align: center;
@@ -111,6 +111,8 @@
   margin-bottom: 12px;
 }
 .apply-btn {
+  margin-top: 18px;
+  width: 100%;
   background: #ffb84d;
   color: #fff;
   border: none;
@@ -158,6 +160,8 @@
   max-width: 150px;
 }
 .chat-btn {
+  margin-top: 18px;
+  width: 100%;
   background: #6cb4ff;
   color: #fff;
   border: none;
@@ -210,4 +214,26 @@
   filter: blur(3px);
   pointer-events: none;
   position: relative;
+}
+.company-logo-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 12px;
+}
+.company-name-label {
+  font-size: 0.85rem;
+  color: #888;
+  margin-top: 4px;
+  text-align: center;
+}
+.company-short-desc {
+  font-size: 0.85rem;
+  color: #888;
+  margin-bottom: 6px;
+  margin-top: -2px;
+}
+.job-card-left.more-narrow {
+  flex: 0 0 44%;
+  min-width: 0;
 } 

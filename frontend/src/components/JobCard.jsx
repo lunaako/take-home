@@ -14,12 +14,13 @@ export default function JobCard({ jobData, currentUser, onProtectedAction }) {
   const {
     companyLogo,
     companyName,
+    companyDescription,
     title,
     salary_min,
     salary_max,
     location,
     job_type,
-    description_full,
+    description,
     timeAgo,
     founder,
     sponsorship_available,
@@ -36,14 +37,18 @@ export default function JobCard({ jobData, currentUser, onProtectedAction }) {
   return (
     <div className="job-card">
       {/* Left section */}
-      <div className="job-card-left short-width">
-        <img src={companyLogo} alt={companyName} className="company-logo" />
+      <div className="job-card-left more-narrow">
+        <div className="company-logo-col">
+          <img src={companyLogo} alt={companyName} className="company-logo" />
+          <div className="company-name-label">{companyName}</div>
+        </div>
         <div className="job-info">
           <div className="job-meta">
             <span className="job-time time-bg black-text">{timeAgo}</span>
             <span className="job-level level-bg black-text">{experience_level_required}</span>
           </div>
           <h2 className="job-title">{title}</h2>
+          <div className="company-short-desc">{companyDescription}</div>
           <div className="job-details">
             <span className="job-detail-item"><FontAwesomeIcon icon={faLocationDot} className="job-icon" /> {location}</span>
             <span>·</span>
@@ -51,7 +56,7 @@ export default function JobCard({ jobData, currentUser, onProtectedAction }) {
             <span>·</span>
             <span className="job-detail-item"><FontAwesomeIcon icon={faMoneyBillWave} className="job-icon" /> ${salary_min / 1000}K/yr - ${salary_max / 1000}K/yr</span>
           </div>
-          <div className="job-desc">{truncateWords(description_full, 100)}</div>
+          <div className="job-desc">{truncateWords(description, 100)}</div>
         </div>
       </div>
       {/* Right section */}
