@@ -29,7 +29,7 @@ function getDisplayJobs() {
       ...job,
       companyName: company?.name,
       companyLogo: company?.logo_url,
-      companyDescription: company?.description,
+      companyDescription: company?.short_description,
       tagNames: jobTagNames,
       founder,
       timeAgo,
