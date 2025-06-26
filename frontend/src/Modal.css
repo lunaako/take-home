@@ -30,6 +30,7 @@
   cursor: pointer;
   z-index: 10;
   transition: color 0.2s;
+  padding: 0
 }
 .modal-close:hover {
   color: #ff9900;
