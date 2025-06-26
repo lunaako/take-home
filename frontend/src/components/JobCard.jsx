@@ -1,6 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot, faBriefcase, faMoneyBillWave } from '@fortawesome/free-solid-svg-icons';
+import Tooltip from './Tooltip';
 import './JobCard.css';
 
 function truncateWords(text, maxWords) {
@@ -36,10 +37,11 @@ export default function JobCard({ jobData, currentUser, onProtectedAction }) {
 
   return (
     <div className="job-card">
-      {/* Left section */}
-      <div className="job-card-left more-narrow">
+      <div className="job-card-left">
         <div className="company-logo-col">
-          <img src={companyLogo} alt={companyName} className="company-logo" />
+          <div className="company-logo-img">
+            <img src={companyLogo} alt={companyName} className="company-logo" />
+          </div>
           <div className="company-name-label">{companyName}</div>
         </div>
         <div className="job-info">
@@ -59,26 +61,24 @@ export default function JobCard({ jobData, currentUser, onProtectedAction }) {
           <div className="job-desc">{truncateWords(description, 100)}</div>
         </div>
       </div>
-      {/* Right section */}
       <div className="job-card-right horizontal-right">
-        <div className="right-content-row">
-          <div className="match-box-btn-col">
-            <div className={notLoggedIn ? 'match-box blurred-box' : 'match-box'}>
-              <div className="match-label">STRONG MATCH</div>
-              <div className="match-desc">{sponsorship_available ? '✔ H1B Sponsor Likely' : 'H1B Sponsor Unlikely'}</div>
-            </div>
-            <button className="apply-btn" onClick={handleButtonClick}>APPLY NOW</button>
+        <div className="match-box-btn-col">
+          {notLoggedIn && <Tooltip />}
+          <div className={notLoggedIn ? 'match-box blurred-box' : 'match-box'}>
+            <div className="match-label">STRONG MATCH</div>
+            <div className="match-desc">{sponsorship_available ? '✔ H1B Sponsor Likely' : 'H1B Sponsor Unlikely'}</div>
           </div>
-          <div className="founder-box-btn-col">
-            <div className={notLoggedIn ? 'founder-box blurred-box' : 'founder-box'}>
-              <img src={founder?.profile_picture_url} alt={founder?.first_name} className="founder-pic" />
-              <div className="founder-info">
-                <div className="founder-name">{founder?.first_name} {founder?.last_name}</div>
-                <div className="founder-bio">{founder?.bio}</div>
-              </div>
+          <button className="apply-btn" onClick={handleButtonClick}>APPLY NOW</button>
+        </div>
+        <div className="founder-box-btn-col">
+          <div className={notLoggedIn ? 'founder-box blurred-box' : 'founder-box'}>
+            <img src={founder?.profile_picture_url} alt={founder?.first_name} className="founder-pic" />
+            <div className="founder-info">
+              <div className="founder-name">{founder?.first_name} {founder?.last_name}</div>
+              <div className="founder-bio">{founder?.bio}</div>
             </div>
-            <button className="chat-btn" onClick={handleButtonClick}>LET'S CHAT</button>
           </div>
+          <button className="chat-btn" onClick={handleButtonClick}>LET'S CHAT</button>
         </div>
       </div>
     </div>

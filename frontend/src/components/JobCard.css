@@ -1,24 +1,45 @@
 .job-card {
-  display: flex;
+  display: grid;
+  grid-template-columns: 7fr 3fr; /* 70/30 split */
+  column-gap: 24px;
   background: #fff;
   border-radius: 8px;
   box-shadow: 0 1px 4px rgba(0,0,0,0.04);
-  padding: 20px 32px;
-  align-items: flex-start;
-  justify-content: space-between;
+  padding: 20px;
   margin: 0 0 2px 0;
-  width: 98%;
-  min-width: 0;
-  max-width: 100vw;
+  align-items: flex-start;
+  width: 100%; /* 确保宽度为100% */
+  position: relative; /* 为tooltip定位添加 */
+  z-index: 1;
 }
 .job-card-left {
-  display: flex;
-  gap: 20px;
-  flex: 1;
-}
-.job-card-left.short-width {
-  flex: 0 0 60%;
+  display: grid;
+  grid-template-columns: 100px 1fr; /* logo列固定宽度，info列自适应 */
+  gap: 24px;
   min-width: 0;
+}
+.job-card-right.horizontal-right {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 两列等宽 */
+  gap: 16px;
+  min-width: 0;
+  max-width: 100%; /* 限制最大宽度 */
+  position: relative;
+  z-index: 2;
+}
+.match-box-btn-col, .founder-box-btn-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+.company-logo-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 3%;
+  margin-left: 3%;
 }
 .company-logo {
   width: 56px;
@@ -27,18 +48,25 @@
   object-fit: cover;
   background: #f3f3f3;
 }
+
+.company-logo-img {
+    align-items: center;
+}
+
+
 .job-info {
-  flex: 1;
+  min-width: 0;
+  padding-right: 20%;
 }
 .job-meta {
   display: flex;
   gap: 8px;
-  font-size: 1rem;
+  font-size: 0.85rem;
   color: #111;
   margin-bottom: 4px;
 }
 .job-title {
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   font-weight: 700;
   color: #ff9900;
   margin: 0 0 8px 0;
@@ -46,7 +74,7 @@
 }
 .job-details {
   color: #888;
-  font-size: 0.92rem;
+  font-size: 0.85rem;
   margin-bottom: 8px;
   display: flex;
   gap: 8px;
@@ -59,9 +87,10 @@
 }
 .job-desc {
   color: #444;
-  font-size: 0.92rem;
+  font-size: 0.85rem;
   margin-bottom: 0;
   text-align: left;
+  line-height: 1.4;
 }
 .job-card-right {
   display: flex;
@@ -69,14 +98,6 @@
   gap: 16px;
   align-items: flex-end;
   min-width: 220px;
-}
-.job-card-right.horizontal-right {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  min-width: 340px;
-  gap: 10px;
-  position: relative;
 }
 .right-content-row {
   display: flex;
@@ -91,30 +112,30 @@
   gap: 12px;
   margin-top: 8px;
 }
-.match-box {
-  background: none;
-  border-radius: 8px;
-  padding: 16px;
-  text-align: center;
-  margin-bottom: 8px;
-  width: 180px;
+.match-box, .founder-box {
+  width: 100%; /* 改为相对宽度 */
+  min-width: 0;
+  max-width: 180px; /* 保持最大宽度限制 */
+  height: 180px; /* 固定高度 */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
 }
 .match-label {
   color: #2d2d6e;
   font-weight: 700;
-  font-size: 1.1rem;
+  font-size: 0.8rem;
   margin-bottom: 4px;
 }
 .match-desc {
   color: #6c6c8a;
-  font-size: 0.95rem;
+  font-size: 0.6rem;
   margin-bottom: 12px;
 }
-.apply-btn {
-  margin-top: 18px;
+.apply-btn, .chat-btn {
+  margin-top: auto; /* 将按钮推到底部 */
   width: 100%;
-  background: #ffb84d;
-  color: #fff;
   border: none;
   border-radius: 8px;
   padding: 8px 20px;
@@ -122,14 +143,14 @@
   cursor: pointer;
   font-size: 1rem;
 }
-.founder-box {
-  background: #e6f0ff;
-  border-radius: 8px;
-  padding: 16px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 180px;
+.apply-btn {
+  background: #ffb84d;
+  color: #fff;
+}
+.chat-btn {
+  background: #6cb4ff;
+  color: #fff;
+  padding: 8px 20px; /* 统一按钮padding */
 }
 .founder-pic {
   width: 40px;
@@ -137,6 +158,7 @@
   border-radius: 50%;
   object-fit: cover;
   margin-bottom: 8px;
+  align-self: center;
 }
 .founder-info {
   text-align: center;
@@ -146,30 +168,18 @@
 .founder-name {
   font-weight: 600;
   color: #2d2d6e;
-  font-size: 1rem;
+  font-size: 0.8rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 .founder-bio {
   color: #6c6c8a;
-  font-size: 0.95rem;
+  font-size: 0.8rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 150px;
-}
-.chat-btn {
-  margin-top: 18px;
-  width: 100%;
-  background: #6cb4ff;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  padding: 6px 18px;
-  font-weight: 600;
-  cursor: pointer;
-  font-size: 1rem;
 }
 .job-time.time-bg.black-text {
   color: #111;
@@ -212,28 +222,54 @@
 }
 .blurred-box {
   filter: blur(3px);
-  pointer-events: none;
   position: relative;
+  width: 100%;
+  user-select: none; /* 防止文本被选中 */
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
 }
-.company-logo-col {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-right: 12px;
+
+.blurred-box * {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.blurred-box::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  cursor: pointer;
 }
 .company-name-label {
-  font-size: 0.85rem;
-  color: #888;
+  font-size: 0.7rem;
+  color: #666;
   margin-top: 4px;
+  margin-left: 0%;
+  margin-right: 0%;
   text-align: center;
+  word-break: break-word;
 }
 .company-short-desc {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   color: #888;
   margin-bottom: 6px;
   margin-top: -2px;
+  text-align: left;
 }
-.job-card-left.more-narrow {
-  flex: 0 0 44%;
-  min-width: 0;
-} 
+/* 移除 pointer-events: none，改为在特定元素上控制 */
+.match-box {
+  background: none;
+  border-radius: 8px;
+  padding: 16px;
+  text-align: center;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
