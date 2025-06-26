@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot, faBriefcase, faMoneyBillWave } from '@fortawesome/free-solid-svg-icons';
 import Tooltip from './Tooltip';
 import './JobCard.css';
+import jobSearchIcon from '/job-search.png';
 
 function truncateWords(text, maxWords) {
   if (!text) return '';
@@ -65,6 +66,9 @@ export default function JobCard({ jobData, currentUser, onProtectedAction }) {
         <div className="match-box-btn-col">
           {notLoggedIn && <Tooltip />}
           <div className={notLoggedIn ? 'match-box blurred-box' : 'match-box'}>
+            <div className="match-box-icon">
+              <img src={jobSearchIcon} alt="Job Search" />
+            </div>
             <div className="match-label">STRONG MATCH</div>
             <div className="match-desc">{sponsorship_available ? '✔ H1B Sponsor Likely' : 'H1B Sponsor Unlikely'}</div>
           </div>

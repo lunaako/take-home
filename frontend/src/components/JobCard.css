@@ -1,6 +1,6 @@
 .job-card {
   display: grid;
-  grid-template-columns: 7fr 3fr; /* 70/30 split */
+  grid-template-columns: 7fr 3fr; /* Main content / Sidebar split */
   column-gap: 24px;
   background: #fff;
   border-radius: 8px;
@@ -8,22 +8,21 @@
   padding: 20px;
   margin: 0 0 2px 0;
   align-items: flex-start;
-  width: 100%; /* 确保宽度为100% */
-  position: relative; /* 为tooltip定位添加 */
+  width: 100%; /* Ensure full width */
+  position: relative; /* For tooltip positioning */
   z-index: 1;
 }
 .job-card-left {
   display: grid;
-  grid-template-columns: 100px 1fr; /* logo列固定宽度，info列自适应 */
-  gap: 24px;
+  gap: 2%;
+  grid-template-columns: 100px 1fr; 
   min-width: 0;
 }
 .job-card-right.horizontal-right {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 两列等宽 */
-  gap: 16px;
+  grid-template-columns: repeat(2, 1fr);
   min-width: 0;
-  max-width: 100%; /* 限制最大宽度 */
+  max-width: 100%;
   position: relative;
   z-index: 2;
 }
@@ -31,7 +30,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 50px;
   min-width: 0;
 }
 .company-logo-col {
@@ -113,28 +112,51 @@
   margin-top: 8px;
 }
 .match-box, .founder-box {
-  width: 100%; /* 改为相对宽度 */
+  width: 100%; 
   min-width: 0;
-  max-width: 180px; /* 保持最大宽度限制 */
-  height: 180px; /* 固定高度 */
+  max-width: 180px; 
+  height: 180px; 
   display: flex;
   flex-direction: column;
   justify-content: center;
   box-sizing: border-box;
 }
+
+.match-box-icon {
+  width: 90px;
+  height: 90px;
+  margin-bottom: 8px;
+  opacity: 0.8;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #00bbff;
+  border-radius: 50%;
+}
+
+.match-box-icon img {
+  width: 70%;
+  height: 70%;
+  object-fit: cover;
+  display: block;
+}
+
 .match-label {
   color: #2d2d6e;
   font-weight: 700;
   font-size: 0.8rem;
   margin-bottom: 4px;
 }
+
 .match-desc {
   color: #6c6c8a;
   font-size: 0.6rem;
   margin-bottom: 12px;
 }
 .apply-btn, .chat-btn {
-  margin-top: auto; /* 将按钮推到底部 */
+  margin-top: auto;
   width: 100%;
   border: none;
   border-radius: 8px;
@@ -148,9 +170,22 @@
   color: #fff;
 }
 .chat-btn {
-  background: #6cb4ff;
-  color: #fff;
-  padding: 8px 20px; /* 统一按钮padding */
+  width: 100%;
+  background: #ffffff;
+  color: #ff9900;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 20px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+.chat-btn:hover {
+  background: #fff;
+  color: #ff7700;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 .founder-pic {
   width: 40px;
@@ -200,7 +235,9 @@
   margin-right: 8px;
 }
 /* Remove job-tags and tag-bg styles */
-.job-tags, .tag-bg, .job-tag { display: none !important; }
+.job-tags, .tag-bg, .job-tag { 
+  display: none !important; 
+}
 .job-icon {
   width: 16px;
   height: 16px;
@@ -224,7 +261,7 @@
   filter: blur(3px);
   position: relative;
   width: 100%;
-  user-select: none; /* 防止文本被选中 */
+  user-select: none; /* Prevent text selection */
   -webkit-user-select: none; /* Safari */
   -moz-user-select: none; /* Firefox */
   -ms-user-select: none; /* IE10+/Edge */
@@ -237,6 +274,7 @@
   -ms-user-select: none;
 }
 
+/* Add overlay for hover events */
 .blurred-box::after {
   content: '';
   position: absolute;
@@ -263,13 +301,29 @@
   margin-top: -2px;
   text-align: left;
 }
-/* 移除 pointer-events: none，改为在特定元素上控制 */
+
 .match-box {
   background: none;
   border-radius: 8px;
   padding: 16px;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 100%;
-  position: relative;
-  z-index: 1;
+  min-width: 0;
+  max-width: 180px;
+  height: 180px;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.founder-box-btn-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  background: #00bbff;
+  border-radius: 8px;
+  padding: 16px;
 }
